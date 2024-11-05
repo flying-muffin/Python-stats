@@ -8,16 +8,18 @@ def stats(array):
 
 
 result = np.array([])
+outcomes = np.arange(1, 6)
 # outcome = {0:"heads", 1: "tail"}
 
-n_tosses = 100
-n_experiments = 10000
+n_tosses = 10
+n_experiments = 10
 
 for _ in range(n_experiments):
-    result = np.append(result, np.random.binomial(n_tosses, 0.5))
+    result = np.append(result, 1 + np.random.multinomial(n_tosses, [1/6]*6, n_experiments))
 
 
 print(stats(result))
-plt.hist(result, density=True)
+
+plt.hist(result, density=True, bins=6)
 sb.kdeplot(result, color='red')
 plt.show()
